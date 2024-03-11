@@ -20,19 +20,6 @@ function App(props) {
   const [error, setError] = useState("");
   const { acceptedFiles, getRootProps, getInputProps } = useDropzone();
 
-
-  // async function createItem(boardId, columnValues, name) {
-  //   const mutation = `mutation create_item($boardId: ID!, $itemName: String!, $columnValues: JSON) {
-  //     create_item(board_id:$boardId, item_name:$itemName, column_values:$columnValues, create_labels_if_missing: true) {
-  //         id
-  //     }
-  // }`;
-  //   const variables = { boardId: Number(boardId), itemName: `${name}`, columnValues: JSON.stringify(columnValues) };
-  //   const response = await monday.api(mutation, { variables })
-  //   console.log('response', response);
-  //   return response.data.create_item.id;
-  // }
-
   useEffect(() => {
     monday.listen('context', res => {
       console.log('Workspace ID', res.data.workspaceId);
@@ -196,10 +183,6 @@ function App(props) {
         const { dependencies, item_ids } = await createAllItems(_.filter(data, row => row.length > 0), mapping, boardId);
         await connectDependencies(dependencies, item_ids, boardId);
         setStateLogger(`All set! to view your board: https://getcruise.monday.com/boards/${boardId}`)
-        // get headers & data
-        // setHeaders(headers.map(value => { return { value: indexOf(headers, value), label: value } }));
-        // setData(_.filter(data, (row) => row.length > 0));
-        // createItems(_.filter(data, (row) => row.length > 0), headers.map(value => { return { value: indexOf(headers, value), label: value } }), ws);
       }
     };
 
